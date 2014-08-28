@@ -8,6 +8,8 @@ Here is a basic example :
 This script will allow everybody to have a quick overview of the timings.
 It's definitely a good idea idea to use it during dev/staging environements.
 
+Tip : you may find it also very useful for mobile web dev as Navigation Timing API is supported by most of browsers. 
+
 #Basic usage
 In the current version, speedy.js is not intrusive : You just have to include it _somewhere_ in you page. 
 speedy.js will wait for the load event or run immediatly if the document is already fully loaded.
