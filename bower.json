@@ -1,0 +1,16 @@
+{
+  "name": "speedy.js",
+  "version": "0.0.0",
+  "homepage": "https://github.com/Cybermaxs/speedy.js",
+  "author": "Cybermaxs",
+  "main": "dist/speedy.min.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "examples",
+    "tests"
+  ]
+}

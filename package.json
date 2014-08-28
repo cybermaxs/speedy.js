@@ -1,8 +1,8 @@
 {
-  "name": "responder.js",
+  "name": "speedy.js",
   "version": "0.0.0",
-  "description": "responder.js\r ============",
-  "main": "responder.js",
+  "description": "speedy.js\r ============",
+  "main": "speedy.js",
   "directories": {
     "example": "examples",
     "test": "test"
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Cybermaxs/responder.js.git"
+    "url": "https://github.com/Cybermaxs/speedy.js.git"
   },
   "keywords": [
     "performance",
@@ -23,11 +23,12 @@
   "author": "Cybermaxs",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Cybermaxs/responder.js/issues"
+    "url": "https://github.com/Cybermaxs/speedy.js/issues"
   },
-  "homepage": "https://github.com/Cybermaxs/responder.js",
+  "homepage": "https://github.com/Cybermaxs/speedy.js",
   "devDependencies": {
     "gulp-uglify": "^0.3.2",
-    "gulp": "~3.8.7"
+    "gulp": "~3.8.7",
+    "gulp-jshint": "~1.8.4"
   }
 }

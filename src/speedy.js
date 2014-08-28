@@ -1,4 +1,5 @@
-/* respond.js */
+/* speedy.js */
+/*jshint loopfunc: true */
 (function (w) {
     this.w = w;
     this.log = null;
@@ -57,7 +58,7 @@
     var getPerfObjKeys = function (obj) {
         var keys = Object.keys(obj);
         return keys.length ? keys : Object.keys(Object.getPrototypeOf(obj));
-    }
+    };
 
     var computePageEventsTimings = function () {
 
@@ -79,7 +80,7 @@
         }
 
         return eventsTimings;
-    }
+    };
 
     var createBoxContent = function () {
         var c = document.createElement('div');
@@ -92,9 +93,7 @@
         else {
 
             for (var i = 0, l = this.log.sections.length; i < l; i++) {
-                content += '<span style="color:rgb(' + this.log.sections[i].color.join(',') + ')">'
-                    + this.log.sections[i].duration + ' ms (' + this.log.sections[i].name + ')'
-                    + ' </span> ' + (i < l - 1 ? ' +' : '');
+                content += '<span style="color:rgb(' + this.log.sections[i].color.join(',') + ')">' + this.log.sections[i].duration + ' ms (' + this.log.sections[i].name + ')' + ' </span> ' + (i < l - 1 ? ' +' : '');
             }
 
             content = 'Page Load Time <span style="font-weight:bold">' + this.log.totaltime + ' ms </span>  => ' + content;
@@ -105,14 +104,14 @@
         c.appendChild(h);
 
         return c;
-    }
+    };
 
     var createBoxCloseButton = function () {
         var b = document.createElement('button');
         b.innerHTML = 'close this box &times;';
         b.style.cssText = InlineStyles.reset + InlineStyles.button;
         return b;
-    }
+    };
 
     var createBox = function () {
         var container = this.w.document.createElement('div');
@@ -129,7 +128,7 @@
         content.appendChild(button);
         container.appendChild(content);
         return container;
-    }
+    };
 
     var computeData = function () {
 
@@ -155,7 +154,7 @@
 
                 sectionEvents.sort(function (a, b) {
                     return timings[a].time - timings[b].time;
-                })
+                });
 
                 firstEventIndex = sectionEvents[0];
                 lastEventIndex = sectionEvents[sectionEvents.length - 1];
@@ -176,13 +175,13 @@
 
             //ressources
             if (this.w.performance.getEntries) {
-                log.ressources = this.w.performance.getEntries().map(function (entry) { return { name: entry.name, duration: entry.duration } });
+                log.ressources = this.w.performance.getEntries().map(function (entry) { return { name: entry.name, duration: entry.duration }; });
             }
 
-        };
-        
+        }
+
         this.log = log;
-    }
+    };
 
     var run = function () {
         if (!this.log) {
@@ -190,9 +189,9 @@
         }
         var container = createBox();
         document.body.appendChild(container);
-    }
+    };
 
-    function addLoadEvent(func) {
+    var addLoadEvent = function(func) {
         var oldonload = this.w.onload;
         if (typeof this.w.onload != 'function') {
             this.w.onload = func;
@@ -202,9 +201,9 @@
                     oldonload();
                 }
                 func();
-            }
+            };
         }
-    }
+    };
 
     if (this.w.document.readyState === 'complete') {
         // run now if already loaded
