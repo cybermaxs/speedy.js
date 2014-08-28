@@ -7,9 +7,8 @@
     var InlineStyles = {
         reset: 'font-size:12px;z-index:99999;text-align:left;font-family:Calibri,\'Lucida Grande\',Arial,sans-serif;text-shadow:none;box-shadow:none;display:inline-block;color:#444;font-weight:normal;border:none;margin:0;padding:0;background:none;',
         element: 'position:fixed;margin:0 auto;top: 0;left:0;right:0;border-bottom:solid 1px #EFCEA1;box-shadow:0 2px 5px rgba(0,0,0,.1);',
-        container: 'background:#FFFDF2;background:rgba(255,253,242,.99);padding:2px;display:block;width: 100%;',
+        container: 'background:#FFFDF2;background:rgba(255,253,242,.99);padding:2px;display:block;width: 100%;cursor:pointer;',
         header: 'font-size:12px;font-weight:normal;margin:0 ;width:auto;',
-        button: 'float:right;background:none;border-radius:5px;padding:2px;font-size:12px;line-height:130%;width:auto;margin:0 ;cursor:pointer'
     };
 
     var orderedPageEvents = [
@@ -93,10 +92,10 @@
         else {
 
             for (var i = 0, l = this.log.sections.length; i < l; i++) {
-                content += '<span style="color:rgb(' + this.log.sections[i].color.join(',') + ')">' + this.log.sections[i].duration + ' ms (' + this.log.sections[i].name + ')' + ' </span> ' + (i < l - 1 ? ' +' : '');
+                content += '<span style="color:rgb(' + this.log.sections[i].color.join(',') + ')">' + this.log.sections[i].duration + ' (' + this.log.sections[i].name + ')' + ' </span> ' + (i < l - 1 ? ' + ' : '');
             }
 
-            content = 'Page Load Time <span style="font-weight:bold">' + this.log.totaltime + ' ms </span>  => ' + content;
+            content = '<span style="font-weight:bold">' + this.log.totaltime + ' ms </span>  = ' + content;
         }
 
         h.innerHTML = content;
@@ -106,26 +105,17 @@
         return c;
     };
 
-    var createBoxCloseButton = function () {
-        var b = document.createElement('button');
-        b.innerHTML = 'close this box &times;';
-        b.style.cssText = InlineStyles.reset + InlineStyles.button;
-        return b;
-    };
-
     var createBox = function () {
         var container = this.w.document.createElement('div');
         var content = createBoxContent();
-        var button = createBoxCloseButton();
 
-        button.onclick = function (e) {
-            button.onclick = null;
+        container.onclick = function (e) {
+            container.onclick = null;
             container.parentNode.removeChild(container);
         };
 
         container.style.cssText = InlineStyles.reset + InlineStyles.container + InlineStyles.element;
 
-        content.appendChild(button);
         container.appendChild(content);
         return container;
     };
