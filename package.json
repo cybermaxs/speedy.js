@@ -1,0 +1,33 @@
+{
+  "name": "responder.js",
+  "version": "0.0.0",
+  "description": "responder.js\r ============",
+  "main": "responder.js",
+  "directories": {
+    "example": "examples",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Cybermaxs/responder.js.git"
+  },
+  "keywords": [
+    "performance",
+    "mobile",
+    "wpo",
+    "timings"
+  ],
+  "author": "Cybermaxs",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Cybermaxs/responder.js/issues"
+  },
+  "homepage": "https://github.com/Cybermaxs/responder.js",
+  "devDependencies": {
+    "gulp-uglify": "^0.3.2",
+    "gulp": "~3.8.7"
+  }
+}
