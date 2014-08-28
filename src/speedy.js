@@ -3,6 +3,7 @@
 (function (w) {
     this.w = w;
     this.log = null;
+    this.container = null;
 
     var InlineStyles = {
         reset: 'font-size:12px;z-index:99999;text-align:left;font-family:Calibri,\'Lucida Grande\',Arial,sans-serif;text-shadow:none;box-shadow:none;display:inline-block;color:#444;font-weight:normal;border:none;margin:0;padding:0;background:none;',
@@ -81,7 +82,7 @@
         return eventsTimings;
     };
 
-    var createBoxContent = function () {
+    var createBox = function () {
         var c = document.createElement('div');
         var h = document.createElement('span');
 
@@ -105,9 +106,9 @@
         return c;
     };
 
-    var createBox = function () {
+    var createContainer = function () {
         var container = this.w.document.createElement('div');
-        var content = createBoxContent();
+        var content = createBox();
 
         container.onclick = function (e) {
             container.onclick = null;
@@ -177,8 +178,10 @@
         if (!this.log) {
             computeData();
         }
-        var container = createBox();
-        document.body.appendChild(container);
+        if (!this.container) {
+            this.container = createContainer();
+            document.body.appendChild(container);
+        }
     };
 
     var addLoadEvent = function(func) {
