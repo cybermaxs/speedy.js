@@ -1,8 +1,8 @@
 {
   "name": "speedy.js",
-  "version": "0.0.0",
-  "description": "speedy.js\r ============",
-  "main": "speedy.js",
+  "version": "0.0.1",
+  "description": "Display HTML5 Navigation Timings at the top of the page",
+  "main": "dist/speedy.min.js",
   "directories": {
     "example": "examples",
     "test": "test"
@@ -29,6 +29,7 @@
   "devDependencies": {
     "gulp-uglify": "^0.3.2",
     "gulp": "~3.8.7",
-    "gulp-jshint": "~1.8.4"
+    "gulp-jshint": "~1.8.4",
+    "gulp-bump": "~0.1.11"
   }
 }
