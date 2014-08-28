@@ -30,6 +30,8 @@
     "gulp-uglify": "^0.3.2",
     "gulp": "~3.8.7",
     "gulp-jshint": "~1.8.4",
-    "gulp-bump": "~0.1.11"
+    "gulp-bump": "~0.1.11",
+    "gulp-rename": "~1.2.0",
+    "gulp-concat": "~2.3.4"
   }
 }
