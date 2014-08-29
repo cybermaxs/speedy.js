@@ -1,4 +1,4 @@
-Welcome to speedy.js, a minimalist script (less than 4 KB) that renders page timings at the top of the page.  
+Welcome to speedy.js, a minimalist script (less than 3 KB) that renders page timings at the top of the page.  
 
 Here is a basic example :
 
@@ -10,7 +10,11 @@ It's definitely a good idea idea to use it during dev/staging environements.
 
 Tip : you may find it also very useful for mobile web dev as Navigation Timing API is supported by most of browsers. 
 
-#Basic usage
+#How to install
+You can download the dist version included in this repo or use bower to install this component.
+
+`>bower install speedy.js`
+
 In the current version, speedy.js is not intrusive : You just have to include it _somewhere_ in you page. 
 speedy.js will wait for the load event or run immediatly if the document is already fully loaded.
 
