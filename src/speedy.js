@@ -7,9 +7,9 @@
 
     var InlineStyles = {
         reset: 'font-size:12px;z-index:99999;text-align:left;font-family:Calibri,\'Lucida Grande\',Arial,sans-serif;text-shadow:none;box-shadow:none;display:inline-block;color:#444;font-weight:normal;border:none;margin:0;padding:0;background:none;',
-        element: 'position:fixed;margin:0 auto;top: 0;left:0;right:0;border-bottom:solid 1px #EFCEA1;box-shadow:0 2px 5px rgba(0,0,0,.1);',
-        container: 'background:#FFFDF2;background:rgba(255,253,242,.99);padding:2px;display:block;width: 100%;cursor:pointer;',
-        header: 'font-size:12px;font-weight:normal;margin:0 ;width:auto;',
+        element: 'position:fixed;margin:0;top: 0;left:0;border-bottom:solid 1px #EFCEA1;box-shadow:2px 2px 5px rgba(0,0,0,.1);',
+        container: 'background:#FFFDF2;background:rgba(255,253,242,.99);padding:2px;display:block;cursor:pointer;',
+        header: 'font-size:12px;font-weight:normal;margin:0 ;',
     };
 
     var orderedPageEvents = [
