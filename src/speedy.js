@@ -123,7 +123,9 @@
                 content += '<span style="color:rgb(' + this.stats.sections[i].color.join(',') + ')">' + this.stats.sections[i].duration + ' (' + this.stats.sections[i].name + ')' + ' </span> ' + (i < l - 1 ? ' + ' : '');
             }
 
-            content = '<span style="font-weight:bold">' + this.stats.totaltime + ' ms (' + stats.ressources.length + ' resx) </span>  = ' + content;
+            var resxlabel = this.w.performance.getEntries ? ' (' + stats.ressources.length + ' resx) ' : '';
+
+            content = '<span style="font-weight:bold">' + this.stats.totaltime + ' ms' + resxlabel + '</span>  = ' + content;
         }
 
         h.innerHTML = content;
