@@ -20,6 +20,8 @@ speedy.js will wait for the load event or run immediatly if the document is alre
 
 `<script src="PATHTOSPEEDY/speedy.min.js"></script>`
 
+Important Note : this script has no prerequisites and don't download external resources.
+
 #Can I use ?
 Navigation timing is not currently supported by all browser.
 You can check requirements [here] (http://caniuse.com/#feat=nav-timing)
