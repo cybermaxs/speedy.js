@@ -2,7 +2,7 @@
 /*jshint loopfunc: true */
 (function (w) {
     this.w = w;
-    this.log = null;
+    this.stats = null;
     this.container = null;
 
     var InlineStyles = {
@@ -38,7 +38,21 @@
       'loadEventEnd'
     ];
 
-    var sections = [{
+    var orderedResourceEvents = [
+        'redirectStart',
+        'redirectEnd',
+        'fetchStart',
+        'domainLookupStart',
+        'domainLookupEnd',
+        'connectStart',
+        'connectEnd',
+        'secureConnectionStart',
+        'requestStart',
+        'responseStart',
+        'responseEnd'
+    ];
+
+    var pageSections = [{
         name: 'network',
         color: [224, 84, 63],
         firstEventIndex: orderedPageEvents.indexOf('navigationStart'),
@@ -54,6 +68,19 @@
         firstEventIndex: orderedPageEvents.indexOf('unloadEventStart'),
         lastEventIndex: orderedPageEvents.indexOf('loadEventEnd'),
     }];
+
+    var resourceSections = [{
+        name: 'network',
+        color: [224, 84, 63],
+        firstEventIndex: orderedResourceEvents.indexOf('redirectStart'),
+        lastEventIndex: orderedResourceEvents.indexOf('connectEnd'),
+    }, {
+        name: 'server',
+        color: [255, 188, 0],
+        firstEventIndex: orderedResourceEvents.indexOf('requestStart'),
+        lastEventIndex: orderedResourceEvents.indexOf('responseEnd'),
+    }];
+
 
     var getPerfObjKeys = function (obj) {
         var keys = Object.keys(obj);
@@ -87,16 +114,16 @@
         var h = document.createElement('span');
 
         var content = '';
-        if (!this.w.performance || !this.log) {
+        if (!this.w.performance || !this.stats) {
             content = "Your browser does not support Navigation Timing API.";
         }
         else {
 
-            for (var i = 0, l = this.log.sections.length; i < l; i++) {
-                content += '<span style="color:rgb(' + this.log.sections[i].color.join(',') + ')">' + this.log.sections[i].duration + ' (' + this.log.sections[i].name + ')' + ' </span> ' + (i < l - 1 ? ' + ' : '');
+            for (var i = 0, l = this.stats.sections.length; i < l; i++) {
+                content += '<span style="color:rgb(' + this.stats.sections[i].color.join(',') + ')">' + this.stats.sections[i].duration + ' (' + this.stats.sections[i].name + ')' + ' </span> ' + (i < l - 1 ? ' + ' : '');
             }
 
-            content = '<span style="font-weight:bold">' + this.log.totaltime + ' ms </span>  = ' + content;
+            content = '<span style="font-weight:bold">' + this.stats.totaltime + ' ms (' + stats.ressources.length + ' resx) </span>  = ' + content;
         }
 
         h.innerHTML = content;
@@ -123,7 +150,7 @@
 
     var computeData = function () {
 
-        var log = {
+        var stats = {
             totaltime: 0,
             sections: [],
             ressources: []
@@ -134,9 +161,9 @@
             // sections
             var timings = computePageEventsTimings();
 
-            for (var i = 0, len = sections.length; i < len; i++) {
-                var firstEventIndex = sections[i].firstEventIndex;
-                var lastEventIndex = sections[i].lastEventIndex;
+            for (var i = 0, len = pageSections.length; i < len; i++) {
+                var firstEventIndex = pageSections[i].firstEventIndex;
+                var lastEventIndex = pageSections[i].lastEventIndex;
 
                 var sectionOrder = orderedPageEvents.slice(firstEventIndex, lastEventIndex + 1);
                 var sectionEvents = sectionOrder.filter(function (el) {
@@ -150,7 +177,7 @@
                 firstEventIndex = sectionEvents[0];
                 lastEventIndex = sectionEvents[sectionEvents.length - 1];
 
-                log.sections.push({ name: sections[i].name, duration: timings[lastEventIndex].time - timings[firstEventIndex].time, color: sections[i].color });
+                stats.sections.push({ name: pageSections[i].name, duration: timings[lastEventIndex].time - timings[firstEventIndex].time, color: pageSections[i].color });
 
                 for (var j = 0, flen = sectionEvents.length; j < flen; j++) {
                     var item = sectionEvents[j];
@@ -160,22 +187,23 @@
                 }
             }
 
-            for (var s in log.sections) {
-                log.totaltime += log.sections[s].duration;
+            for (var s in stats.sections) {
+                stats.totaltime += stats.sections[s].duration;
             }
 
             //ressources
             if (this.w.performance.getEntries) {
-                log.ressources = this.w.performance.getEntries().map(function (entry) { return { name: entry.name, duration: entry.duration }; });
+                stats.ressources = this.w.performance.getEntriesByType("resource").map(function (entry) { return { name: entry.name, duration: entry.duration }; });
+
             }
 
         }
 
-        this.log = log;
+        this.stats = stats;
     };
 
     var run = function () {
-        if (!this.log) {
+        if (!this.stats) {
             computeData();
         }
         if (!this.container) {
@@ -184,7 +212,7 @@
         }
     };
 
-    var addLoadEvent = function(func) {
+    var addLoadEvent = function (func) {
         var oldonload = this.w.onload;
         if (typeof this.w.onload != 'function') {
             this.w.onload = func;
